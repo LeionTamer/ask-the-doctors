@@ -25,7 +25,7 @@ Create a `.prettier-rc`
 ```
 
 ```bash
-bun x --bun shadcn@latest add table button input checkbox context-menu table dialog label scroll-area select skeleton toggle
+bun x --bun shadcn@latest add table button input checkbox context-menu table dialog label scroll-area select skeleton toggle textarea
 bun add @tanstack/react-table
 ```
 

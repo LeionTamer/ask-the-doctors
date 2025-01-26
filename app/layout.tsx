@@ -28,9 +28,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-full flex-col bg-slate-200 antialiased`}
       >
         <div className="my-auto flex min-h-[3rem] items-center bg-yellow-600 align-middle">
-          <div>I am divided</div>
+          <div>Header goes here</div>
         </div>
-        <div className="min-h-[calc(100vh-3rem)] bg-blue-400">{children}</div>
+        <div className="min-h-[calc(100vh-3rem)]">{children}</div>
       </body>
     </html>
   )
