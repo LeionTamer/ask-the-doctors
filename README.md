@@ -28,3 +28,10 @@ Create a `.prettier-rc`
 bun x --bun shadcn@latest add table button input checkbox context-menu table dialog label scroll-area select skeleton toggle
 bun add @tanstack/react-table
 ```
+
+Drizzle ORM
+
+```bash
+bun add drizzle-orm pg dotenv @neondatabase/serverless
+bun add --dev drizzle-kit tsx @types/pg
+```
