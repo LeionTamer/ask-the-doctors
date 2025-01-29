@@ -1,11 +1,14 @@
 'use server'
 
 import {
-  doctorsInsertSchemaWithoutId,
+  doctors,
+  doctorsInsertSchema,
   DoctorsInsertType,
 } from '@/drizzle/schemas/doctors'
-import { ActionResponseType } from '@/helpers/formHelpers'
+import { ActionResponseType, PgErrorType } from '@/helpers/formHelpers'
+import { db } from '@/lib/db'
 import { revalidatePath } from 'next/cache'
+import { unknown } from 'zod'
 
 export type AddDoctorActionStateType = {
   success?: boolean
@@ -28,7 +31,7 @@ export async function addDoctorAction(
   ) as unknown as DoctorsInsertType
 
   try {
-    const result = doctorsInsertSchemaWithoutId.safeParse(
+    const result = doctorsInsertSchema.safeParse(
       Object.fromEntries(formData.entries())
     )
 
@@ -40,8 +43,21 @@ export async function addDoctorAction(
       }
     }
 
-    // redirect('/doctors')
-    revalidatePath('/doctors')
+    try {
+      await db
+        .insert(doctors)
+        .values(data)
+        .returning({ id: doctors.id, email: doctors.email })
+      revalidatePath('/doctors')
+    } catch (e) {
+      const error = e as PgErrorType
+      console.error(error)
+      return {
+        success: false,
+        data: { ...prevState.data, ...data },
+        errorMessage: `Failed to insert to doctors table with the issue: ${error?.code}`,
+      }
+    }
 
     return {
       success: true,

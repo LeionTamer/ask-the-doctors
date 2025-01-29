@@ -48,6 +48,11 @@ export function AddDoctorForm({ setOpen }: { setOpen: Dispatch<boolean> }) {
         name="writing_tone"
         errors={formState.errors?.writing_tone}
       />
+      {formState.errorMessage && (
+        <div className="overfl overflow-x-auto text-red-700">
+          {formState.errorMessage}
+        </div>
+      )}
       <DialogFooter>
         <div className="flex flex-row">
           <div className="flex flex-col justify-end">

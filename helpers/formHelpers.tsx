@@ -14,6 +14,11 @@ interface IFormInputFieldProps extends Partial<HTMLInputElement> {
   errors?: string[]
 }
 
+export type PgErrorType = {
+  code?: string
+  message?: string
+}
+
 export function FormInputField({
   label,
   errors,

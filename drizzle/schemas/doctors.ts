@@ -1,13 +1,19 @@
-import { integer, pgTable, uniqueIndex, varchar } from 'drizzle-orm/pg-core'
+import {
+  pgTable,
+  uniqueIndex,
+  varchar,
+  integer,
+  primaryKey,
+} from 'drizzle-orm/pg-core'
 import { createInsertSchema } from 'drizzle-zod'
 import { z } from 'zod'
 
 export const doctors = pgTable(
   'doctors',
   {
-    id: integer().primaryKey(),
+    id: integer().generatedAlwaysAsIdentity(),
     name: varchar('name', { length: 50 }).notNull(),
-    email: varchar('email', { length: 100 }).notNull(),
+    email: varchar('email', { length: 100 }).notNull().unique(), // Ensure email is unique
     writing_tone: varchar('writing_tone', { length: 255 })
       .notNull()
       .default(''),
@@ -15,7 +21,8 @@ export const doctors = pgTable(
   (table) => {
     return [
       {
-        emailIndex: uniqueIndex('email_idx').on(table.email),
+        emailIndex: uniqueIndex('email_idx').on(table.email), // Unique index on email
+        pk: primaryKey({ columns: [table.id, table.email] }),
       },
     ]
   }
@@ -38,8 +45,4 @@ export const doctorsInsertSchema = createInsertSchema(doctors, {
     .optional(),
 })
 
-export const doctorsInsertSchemaWithoutId = doctorsInsertSchema.omit({
-  id: true,
-})
-
-export type DoctorsInsertType = z.infer<typeof doctorsInsertSchemaWithoutId>
+export type DoctorsInsertType = z.infer<typeof doctorsInsertSchema>
