@@ -8,7 +8,6 @@ import {
 import { ActionResponseType, PgErrorType } from '@/helpers/formHelpers'
 import { db } from '@/lib/db'
 import { revalidatePath } from 'next/cache'
-import { unknown } from 'zod'
 
 export type AddDoctorActionStateType = {
   success?: boolean

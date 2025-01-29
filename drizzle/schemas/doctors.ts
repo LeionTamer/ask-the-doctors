@@ -5,7 +5,7 @@ import {
   integer,
   primaryKey,
 } from 'drizzle-orm/pg-core'
-import { createInsertSchema } from 'drizzle-zod'
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
 
 export const doctors = pgTable(
@@ -28,6 +28,9 @@ export const doctors = pgTable(
   }
 )
 
+export const doctorsSelectSchema = createSelectSchema(doctors)
+export type DoctorsSelectType = z.infer<typeof doctorsSelectSchema>
+
 export const doctorsInsertSchema = createInsertSchema(doctors, {
   name: z
     .string({
@@ -44,5 +47,4 @@ export const doctorsInsertSchema = createInsertSchema(doctors, {
     .max(255, { message: 'Writing Tone is limited to 255 characters long' })
     .optional(),
 })
-
 export type DoctorsInsertType = z.infer<typeof doctorsInsertSchema>

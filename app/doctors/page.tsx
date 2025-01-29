@@ -1,7 +1,7 @@
-// import ChatWindow from '@/components/chat-window'
 import { doctors } from '@/drizzle/schemas/doctors'
 import { db } from '@/lib/db'
-import AddDoctor from './_components/add_doctor'
+import AddDoctorDialog from './_components/dialog'
+import { DoctorsTable } from './_components/table'
 
 export default async function DoctorsPage() {
   const doctorsTable = await db.select().from(doctors)
@@ -9,11 +9,11 @@ export default async function DoctorsPage() {
   return (
     <div className="min-h-[calc(100vh-3rem)]">
       <h1>Doctors</h1>
+      <div className="flex justify-end">
+        <AddDoctorDialog />
+      </div>
       <div>
-        <AddDoctor />
-        {doctorsTable.map((doctor) => (
-          <div key={doctor.id}>{doctor.name}</div>
-        ))}
+        <DoctorsTable data={doctorsTable} />
       </div>
     </div>
   )
