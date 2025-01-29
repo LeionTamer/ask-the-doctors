@@ -26,13 +26,20 @@ export const doctorsInsertSchema = createInsertSchema(doctors, {
     .string({
       required_error: 'Name is required',
     })
-    .min(10, { message: 'Name must be at least 10 characters long' })
+    .min(5, { message: 'Name must be at least 10 characters long' })
     .max(50, { message: 'Name must be at most 50 characters long' }),
   email: z.coerce
     .string()
     .email()
-    .min(10, { message: 'Email must be at least 10 characters long' }),
-  writing_tone: z.string().optional(),
+    .min(5, { message: 'Email must be at least 10 characters long' }),
+  writing_tone: z
+    .string()
+    .max(255, { message: 'Writing Tone is limited to 255 characters long' })
+    .optional(),
 })
 
-export type DoctorsInsertType = z.infer<typeof doctorsInsertSchema>
+export const doctorsInsertSchemaWithoutId = doctorsInsertSchema.omit({
+  id: true,
+})
+
+export type DoctorsInsertType = z.infer<typeof doctorsInsertSchemaWithoutId>
