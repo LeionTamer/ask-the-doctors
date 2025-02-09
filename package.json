@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "db:migrate-dev": "drizzle-kit migrate --config=drizzle-dev.config.ts",
+    "db:migrate-prod": "drizzle-kit migrate --config=drizzle-prod.config.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
