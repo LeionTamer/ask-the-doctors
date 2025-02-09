@@ -102,6 +102,7 @@ export async function editDoctorAction(
     }
 
     await db.update(doctors).set(data).where(eq(doctors.id, prevState.data!.id))
+    revalidatePath('/doctors')
 
     return { success: true }
   } catch (error) {
