@@ -8,6 +8,20 @@
       "when": 1738125158359,
       "tag": "0000_swift_ironclad",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1739083725933,
+      "tag": "0001_flowery_natasha_romanoff",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739085555102,
+      "tag": "0002_stormy_firestar",
+      "breakpoints": true
     }
   ]
 }

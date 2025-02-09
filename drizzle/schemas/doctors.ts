@@ -17,6 +17,7 @@ export const doctors = pgTable(
     writing_tone: varchar('writing_tone', { length: 255 })
       .notNull()
       .default(''),
+    summary: varchar('summary', { length: 255 }).notNull().default(''),
   },
   (table) => {
     return [
@@ -43,6 +44,10 @@ export const doctorsInsertSchema = createInsertSchema(doctors, {
     .email()
     .min(5, { message: 'Email must be at least 10 characters long' }),
   writing_tone: z
+    .string()
+    .max(255, { message: 'Writing Tone is limited to 255 characters long' })
+    .optional(),
+  summary: z
     .string()
     .max(255, { message: 'Writing Tone is limited to 255 characters long' })
     .optional(),
