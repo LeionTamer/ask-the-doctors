@@ -1,10 +1,11 @@
 'use client'
 
 import { SendHorizontal } from 'lucide-react'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { ScrollArea } from './ui/scroll-area'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { ScrollArea } from '../ui/scroll-area'
 import { useChat } from 'ai/react'
+import MarkdownRenderer from './markdown'
 
 export default function ChatWindow({
   height = 'calc(100vh - 6rem)',
@@ -27,13 +28,17 @@ export default function ChatWindow({
             className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}
           >
             <div
-              className={`inline-block rounded-lg p-3 ${
+              className={`inline-block rounded-lg p-2 ${
                 message.role === 'user'
                   ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 text-gray-800'
+                  : 'bg-gray-200 text-black'
               }`}
             >
-              {message.content}
+              {message.role === 'user' ? (
+                <p>{message.content}</p>
+              ) : (
+                <MarkdownRenderer content={message.content} />
+              )}
             </div>
           </div>
         ))}
