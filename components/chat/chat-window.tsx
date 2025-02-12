@@ -35,7 +35,7 @@ export default function ChatWindow({
               }`}
             >
               {message.role === 'user' ? (
-                <p>{message.content}</p>
+                <p className="p-2">{message.content}</p>
               ) : (
                 <MarkdownRenderer content={message.content} />
               )}
