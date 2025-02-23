@@ -25,12 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} flex min-h-full flex-col bg-slate-200 antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex h-screen flex-col bg-slate-200 antialiased`}
       >
-        <div className="my-auto flex min-h-[3rem] items-center bg-yellow-600 align-middle">
+        <div className="my-auto flex h-[3rem] items-center bg-red-600 align-middle">
           <div>Header goes here</div>
         </div>
-        <div className="min-h-[calc(100vh-3rem)]">{children}</div>
+        <div className="h-[calc(100vh - 3rem)] flex-grow">{children}</div>
       </body>
     </html>
   )

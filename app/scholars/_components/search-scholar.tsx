@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import { searchScholarAction } from '../_actions/search-scholar-action'
 
 export default function SearchScholar() {
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ['search-scholar'],
     mutationFn: searchScholarAction,
   })
@@ -19,6 +19,7 @@ export default function SearchScholar() {
         <button
           className="rounded-lg bg-blue-500 p-2 text-white"
           onClick={() => mutate()}
+          disabled={isPending}
         >
           Search
         </button>

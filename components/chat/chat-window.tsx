@@ -8,7 +8,7 @@ import { useChat } from 'ai/react'
 import MarkdownRenderer from './markdown'
 
 export default function ChatWindow({
-  height = 'calc(100vh - 6rem)',
+  height = 'calc(100vh - 3rem)',
 }: {
   height?: string
 }) {
@@ -21,7 +21,7 @@ export default function ChatWindow({
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col p-4" style={{ height }}>
-      <ScrollArea className="mb-4 flex-grow rounded-lg border p-4">
+      <ScrollArea className="border-10 mb-4 flex-grow border border-red-600 p-4">
         {messages.map((message) => (
           <div
             key={message.id}
@@ -31,7 +31,7 @@ export default function ChatWindow({
               className={`inline-block rounded-lg p-2 ${
                 message.role === 'user'
                   ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 text-black'
+                  : 'bg-orange-500 text-muted'
               }`}
             >
               {message.role === 'user' ? (
